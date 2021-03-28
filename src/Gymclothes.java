@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /*
  * 점심시간에 도둑이 들어, 일부 학생이 체육복을 도난당했습니다.
  * 다행히 여벌 체육복이 있는 학생이 이들에게 체육복을 빌려주려 합니다.
@@ -23,7 +25,41 @@ public class Gymclothes {
 		// int n : 전체 학생의 수
 		// int[] lost : 체육복을 도난당한 학생들의 번호가 담긴 배열
 		// int[] reserve : 여벌의 체육복을 가져온 학생들의 번호가 담긴 배열
-		int answer = 0;
+		
+		// 전체 학생수?
+		int answer = n - lost.length;
+		
+		
+		
+		// 여벌 가져온애가 도난당했을때
+		for(int i=0; i<lost.length; i++) {
+			for(int j=0; j<reserve.length; j++) {
+				if(lost[i]==reserve[j]) {
+					reserve[j]=-1;
+					lost[i]=-1;
+					break;
+				}
+			}
+		}
+		
+		// 도난당한애한테 여벌빌려줄때
+		for(int i=0; i<lost.length; i++) {
+			for(int j=0; j<reserve.length; j++) {
+				
+			}
+		}
+		
 		return answer; //체육수업을 들을 수 있는 학생의 최댓값
 	}
+	
+	public static void main(String[] args) {
+		Gymclothes g = new Gymclothes();
+		
+		int[] lost = {2,4};
+		int[] reserve = {1,3,5};
+		
+		
+	}
 }
+
+
