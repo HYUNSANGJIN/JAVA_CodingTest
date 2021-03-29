@@ -30,36 +30,34 @@ public class Gymclothes {
 		int answer = n - lost.length;
 		
 		
-		
 		// 여벌 가져온애가 도난당했을때
 		for(int i=0; i<lost.length; i++) {
 			for(int j=0; j<reserve.length; j++) {
 				if(lost[i]==reserve[j]) {
-					reserve[j]=-1;
+					answer++;
+					reserve[j]=-1; 
 					lost[i]=-1;
 					break;
 				}
 			}
 		}
 		
+		
 		// 도난당한애한테 여벌빌려줄때
 		for(int i=0; i<lost.length; i++) {
 			for(int j=0; j<reserve.length; j++) {
-				
+				// 잃어버린애 비교하고
+				if((lost[i]-1 == reserve[j] || lost[i]+1 == reserve[j])) {
+					answer++;
+					reserve[j] = -1;
+					break;
+				}
 			}
 		}
 		
 		return answer; //체육수업을 들을 수 있는 학생의 최댓값
 	}
-	
-	public static void main(String[] args) {
-		Gymclothes g = new Gymclothes();
-		
-		int[] lost = {2,4};
-		int[] reserve = {1,3,5};
-		
-		
-	}
+
 }
 
 
