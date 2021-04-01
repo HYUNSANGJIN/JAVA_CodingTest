@@ -1,6 +1,5 @@
-import java.util.Arrays;
-
 /*
+ * 
  * 점심시간에 도둑이 들어, 일부 학생이 체육복을 도난당했습니다.
  * 다행히 여벌 체육복이 있는 학생이 이들에게 체육복을 빌려주려 합니다.
  * 학생들의 번호는 체격 순으로 매겨져 있어, 바로 앞번호의 학생이나 바로 뒷번호의 학생에게만 체육복을 빌려줄 수 있습니다. 
@@ -20,49 +19,46 @@ import java.util.Arrays;
  * 	  이때 이 학생은 체육복을 하나만 도난당했다고 가정하며, 
  *    남은 체육복이 하나이기에 다른 학생에게는 체육복을 빌려줄 수 없습니다.
  */
-public class Gymclothes {
-	public int solution(int n, int[] lost, int[] reserve) {
-		// int n : 전체 학생의 수
-		// int[] lost : 체육복을 도난당한 학생들의 번호가 담긴 배열
-		// int[] reserve : 여벌의 체육복을 가져온 학생들의 번호가 담긴 배열
+
+// 가정 : lost[1,2,3]
+//		 reserve[3,4]
+ 
+public class Gymclothes2 {
+	public static void main(String[] args) {
+	
+		int n = 5;
+		int[]lost= {1,2,3};
+		int[]reserve= {3,4};
 		
-		// 체육수업을 들을수 있는 최소 학생수
 		int answer = n - lost.length;
 		
-		
-		// 여벌 가져온애가 도난당했을때
-		for(int i=0; i<lost.length; i++) {  // lost학생 수와
-			for(int j=0; j<reserve.length; j++) { // reserve 학생수 돌리고
-				if(lost[i] == reserve[j]) { // lost학생과 reserve학생이 같을때
-					answer++; // 그 학생도 수업을 들을수 있는 최소 학생이니깐 +1
-					lost[i] = -10; // 같은 학생이면 -10초기화
-					reserve[j] = -10;
-					break; // 참이면 break
-				}
-			}
-		}
-		
-		
-		// 도난당한애한테 여벌빌려줄때
-		for(int i=0; i<lost.length; i++) { 
+		for(int i=0; i<lost.length; i++) {
 			for(int j=0; j<reserve.length; j++) {
-				if(lost[i] == reserve[j]+1) { // reserve학생이 앞 학생 or 뒤 학생을 빌려 줄수 있으므로 
-											 // 빌림을 당한 학생은 +1
+				if(lost[i]==reserve[j]) {
 					answer++;
-					reserve[j] = -10;
-					break;
-				}else if(lost[i] == reserve[j]-1) { // 아니면 -1
-					answer++;
+					lost[i] = -10;
 					reserve[j] = -10;
 					break;
 				}
 			}
 		}
 		
+		for(int i=0; i<lost.length; i++) {
+			for(int j=0; j<reserve.length; j++) {
+				if(lost[i]==reserve[j]+1) {
+					answer++;
+					reserve[j]=-10;
+					break;
+				}else if(lost[i]==reserve[j]-1) {
+					answer++;
+					reserve[j]=-10;
+					break;
+				}
+			}
+		}
 		
-		return answer; //체육수업을 들을 수 있는 학생의 최댓값
+		System.out.println(answer);
+		
 	}
-
 }
-
 
